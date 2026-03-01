@@ -1,12 +1,17 @@
-def generate_nudge(row):
+def generate_nudges(features):
 
-    if row["night_flag"] == 1:
-        return "You tend to spend late at night. Consider a midnight spending cap."
+    nudges = []
 
-    if row["micro_impulse"] == 1:
-        return "Frequent small purchases are adding up. Try a weekly micro-spend limit."
+    if features["NIGHT_FLAG"]:
+        nudges.append("You tend to spend after midnight. Consider a 12AM spending lock.")
 
-    if row["emotional_volatility"] > 3:
-        return "This purchase deviates significantly from your normal spending."
+    if features["MICRO_CLUSTER"] > 5:
+        nudges.append("Frequent small purchases are accumulating significantly.")
 
-    return "Your spending pattern looks stable."
+    if features["PDI"] > 2:
+        nudges.append("High spending immediately after salary credit detected.")
+
+    if features["EVSS"] > 2:
+        nudges.append("Your spending deviates strongly from your normal pattern.")
+
+    return nudges

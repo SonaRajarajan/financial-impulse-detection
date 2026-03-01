@@ -1,5 +1,8 @@
 fastapi
 uvicorn
 pandas
-joblib
-xgboost
+numpy
+pytesseract
+pillow
+python-multipart
+scikit-learn

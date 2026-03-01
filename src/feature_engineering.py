@@ -1,32 +1,41 @@
 import pandas as pd
 import numpy as np
+from datetime import timedelta
 
-def engineer_features(df):
+def calculate_dli(df):
+    df = df.sort_values("timestamp")
+    df["within_2hr"] = (
+        df["timestamp"].diff() <= timedelta(hours=2)
+    )
+    return int(df["within_2hr"].rolling(3).sum().max() >= 3)
 
-    df["timestamp"] = pd.to_datetime(df["timestamp"])
-    df["hour"] = df["timestamp"].dt.hour
-    df["weekday"] = df["timestamp"].dt.weekday
-    df["weekend"] = df["weekday"] >= 5
 
-    # Night impulse
-    df["night_flag"] = df["hour"].apply(lambda x: 1 if 1 <= x <= 4 else 0)
+def calculate_evss(df):
+    weekly_mean = df["amount"].mean()
+    std = df["amount"].std() + 1
+    current = df["amount"].iloc[-1]
+    return abs(current - weekly_mean) / std
 
-    # Micro impulse (< 300)
-    df["micro_impulse"] = df["amount"].apply(lambda x: 1 if x < 300 else 0)
 
-    # Emotional volatility
-    user_mean = df.groupby("user_id")["amount"].transform("mean")
-    user_std = df.groupby("user_id")["amount"].transform("std")
+def calculate_pdi(df):
+    salary_day = df[df["timestamp"].dt.day == 1]
+    if salary_day.empty:
+        return 0
+    first_48 = df[df["timestamp"] <= salary_day["timestamp"].iloc[0] + timedelta(days=2)]
+    return first_48["amount"].sum() / (df["amount"].mean() + 1)
 
-    df["emotional_volatility"] = abs(df["amount"] - user_mean) / (user_std + 1)
 
-    # Weekend ratio per user
-    weekend_spend = df[df["weekend"] == True].groupby("user_id")["amount"].sum()
-    weekday_spend = df[df["weekend"] == False].groupby("user_id")["amount"].sum()
+def calculate_micro_cluster(df):
+    small_tx = df[df["amount"] < 300]
+    return len(small_tx)
 
-    ratio = (weekend_spend / (weekday_spend + 1)).reset_index()
-    ratio.columns = ["user_id", "weekend_ratio"]
 
-    df = df.merge(ratio, on="user_id", how="left")
+def calculate_night_flag(df):
+    night_tx = df[df["timestamp"].dt.hour.between(1,4)]
+    return int(len(night_tx) > 0)
 
-    return df
+
+def calculate_weekend_ratio(df):
+    weekend = df[df["timestamp"].dt.weekday >= 5]["amount"].sum()
+    weekday = df[df["timestamp"].dt.weekday < 5]["amount"].sum()
+    return weekend / (weekday + 1)
