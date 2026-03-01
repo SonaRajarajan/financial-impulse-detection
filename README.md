@@ -116,7 +116,8 @@ financial-impulse-detection/
 
 ### Dashboard Overview
 
-![Dashboard](./screenshots/dashboard.png)
+<img width="1469" height="576" alt="image" src="https://github.com/user-attachments/assets/e5d99649-68e8-401f-be9a-9d5d17f1af79" />
+
 
 ---
 
@@ -171,4 +172,5 @@ uvicorn app:app --reload
 cd impulse-frontend
 npm install
 npm run dev
+
 
