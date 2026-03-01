@@ -1,4 +1,4 @@
-# Financial Impulse Detection System - VR Sona (22MIA1161)
+<img width="1451" height="828" alt="image" src="https://github.com/user-attachments/assets/be03165f-ef2b-43c4-aac7-a1926daf653f" /># Financial Impulse Detection System - VR Sona (22MIA1161)
 
 An AI-powered behavioral analytics platform that detects impulsive financial patterns using machine learning and behavioral signal engineering.
 
@@ -118,23 +118,32 @@ financial-impulse-detection/
 
 <img width="1469" height="576" alt="image" src="https://github.com/user-attachments/assets/e5d99649-68e8-401f-be9a-9d5d17f1af79" />
 
+<img width="1450" height="831" alt="image" src="https://github.com/user-attachments/assets/725fc3a7-6fc3-4846-b402-b041b17c2071" />
+
 ---
 
 ### Risk Gauge + Feature Cards
 
-![Risk](./screenshots/risk.png)
+<img width="1451" height="828" alt="image" src="https://github.com/user-attachments/assets/0d98d99f-5f05-49f7-a4a4-54166cd35b22" />
+
+<img width="708" height="371" alt="image" src="https://github.com/user-attachments/assets/076f9647-2eda-42ec-9c17-3050b117edd1" />
+
+<img width="700" height="445" alt="image" src="https://github.com/user-attachments/assets/9aac0b4f-463c-46eb-a257-510781faca83" />
+
+<img width="1414" height="460" alt="image" src="https://github.com/user-attachments/assets/cb044268-1e4a-4ea7-91ca-2905f3458926" />
 
 ---
 
 ### Behaviour Analysis & Recommendations
 
-![Analysis](./screenshots/analysis.png)
+<img width="1451" height="812" alt="image" src="https://github.com/user-attachments/assets/81d1f5ef-2f9c-4584-839a-9c4a55b294f6" />
+
 
 ---
 
 ### ML Explainability Breakdown
 
-![Explainability](./screenshots/explainability.png)
+<img width="784" height="376" alt="image" src="https://github.com/user-attachments/assets/66c75f29-0ee8-4ae4-b8f5-c327e82bf795" />
 
 ---
 
@@ -171,6 +180,7 @@ uvicorn app:app --reload
 cd impulse-frontend
 npm install
 npm run dev
+
 
 
 
